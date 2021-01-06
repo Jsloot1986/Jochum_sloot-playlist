@@ -10,82 +10,215 @@ body{
 }
 
 .App{
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  margin-top: 20px;
-
-}
-
-.song-form{
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+  text-align: center;
 }
 
 h1{
-  text-align: center;
   background-color: purple;
-  
-  }
-
-input, select{
-  border-radius: 10px;
-  text-align: center;
-  width: 200px;
-  height: 20px;
-  background-color:aliceblue;
-  margin-left: 75px;
-  margin-bottom: 5px;
+  margin-top: 20px;
 }
 
-select{
-  text-align-last: center;
+.form-container{
+  display: flex;
+  flex-direction: column;
+}
+
+label{
+  background-color: salmon;
+  border-radius: 10px;
+}
+
+input, select{
+  text-align: center;
+  border-radius: 10px;
 }
 
 .submit{
-  background-color:blue;
-  height: 25px;
   width: 100px;
+  height: auto;
+  background-color: blue;
   color: white;
-  font-size: 15px;
-  font-weight: bolder;
-  margin-top: 20px;
-  margin-left: 125px;
-  cursor: pointer;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  border: 1px solid white;
+  border-radius: 10px;
 }
 
 .submit:hover{
-  opacity: 0.5;
+  background-color: lightblue;
+  color: black;
+  font-size: 25px;
+}
+
+button{
+  width: 100px;
+  height: auto;
+  background-color: darkblue;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  margin: 5px;
+  border: 1px solid white;
+  border-radius: 10px;
+}
+
+button:hover{
   width: 120px;
-  color: lightblue;
+  opacity: 0.8;
 }
 
-p{
-  border: solid 1px white;
-  padding: 2px;
+.container{
+  min-height: 100vh;
+  min-width: 400px;
+  border: 2px solid white;
+  padding-bottom: 40px;
 }
-th{
-  border-bottom: solid 1px white;
+
+.songlistBox{
+  min-height: 100vh;
+  min-width: 330px;
+  background-color:darkblue;
+  border: 2px solid white;
 }
 
+.songlistItem{
+  display: grid;
+  grid-template-columns: 110px 110px 55px 30px 60px;
+  border-bottom: 1px solid white;
+}
 
-@media only screen and (min-width: 768px){
+.Title_songlistbox p:nth-child(odd){
+  background-color: purple;
+  font-size: 18px
+}
 
+.Title_songlistbox p:nth-child(even){
+  background-color: salmon;
+  font-size: 18px
+}
+
+.songlistItem p{
+  padding: 8px;
+  font-size: 20px;
+  margin: 0;
+  letter-spacing: 1px;
+}
+
+.item_songlist p:nth-child(odd){
+  background-color: red;
+  font-size: 18px;
+}
+
+.item_songlist p:nth-child(even){
+  background-color: orange;
+  border-top: 2px solid white;
+  border-left: 2px solid white;
+  font-size: 18px;
+}
+
+.songlistItem button{
+  width: 40px;
+  height: 40px;
+}
+
+.songlistItem button i{
+  font-size: 22px;
+}
+
+.songlistItem button i:hover{
+  font-size: 30px;
+}
+
+@media only screen and (min-width: 600px){
 .song-form{
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: 250px 250px;
+  grid-gap: 10px;
 }
-.submit{
-  margin-top: 0px;
-  margin-left: 0px;
+
+label{
+  border-radius: 10px;
+  width: 250px;
+  height: 50px;
+  margin-left: 50px;
 }
+
 input, select{
-  margin-top: 0px;
-  margin-left: 0px;
-}
-
+  text-align: center;
+  border-radius: 10px;
 
 }
 
+.submit{
+  margin-left: 250px;
+  
+}
 
+.genreButtons{
+  display: grid;
+  grid-template-columns: 200px 200px 200px;
+}
+
+button{
+ margin-left: 80px;
+}
+
+.container{
+  margin-left: 30px;
+  min-width: 600px;
+}
+
+.songlistBox{
+  min-width: 550px;
+}
+
+.songlistItem{
+  grid-template-columns: 180px 160px 100px 50px 75px;
+}
+
+.songlistItem button{
+  margin: 10px;
+}
+
+button{
+  margin-left: 100px;
+}
+}
+
+@media only screen and (min-width: 800px){
+  .song-form{
+    grid-template-columns: 300px 300px 300px 300px;
+  }
+
+  label{
+    margin-left: 20px;
+    width: 300px;
+  }
+
+  .submit{
+    transform: translate(1050px, -50px);
+  }
+
+  .genreButtons{
+    display: flex;
+  }
+
+  button{
+    margin-left: 20px;
+    margin-bottom: 10px;
+    width: 150px;
+  }
+
+  .container{
+    margin-left: 40px;
+  }
+
+  .songlistItem{
+    grid-template-columns: 375px 360px 200px 60px 105px;
+  }
+
+  .songlistItem button{
+    margin-left: 25px;
+  }
+}

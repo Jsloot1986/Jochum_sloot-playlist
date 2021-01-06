@@ -1,54 +1,68 @@
-import React from 'react';
+import React, {useContext, useState }from 'react';
+import { SongContext } from '../context/useContext';
 
-class SongForm extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            title: "", artist: "", genre: 0, rating: 0
-        };
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+function SongForm() {
+    const [songs, setSongs] = useContext(SongContext);
+    
+    const [title, setTitle] = useState('');
+    const [artist, setArtist] = useState('');
+    const [genre, setGenre] = useState('');
+    const [rating, setRating] = useState('');
+
+    //handle input
+    const handleTitleInput = (event) => setTitle(event.target.value);
+    const handleArtistInput = (event) => setArtist(event.target.value);
+    const handleGenreInput = (event) => setGenre(event.target.value);
+    const handleRatingInput = (event) => setRating(event.target.value);
+
+    const emptyStates = () => {
+        setTitle('')
+        setArtist('')
+        setGenre('')
+        setRating('')
     }
-    handleChange(e) {
-        const value = e.target.value;
-        this.setState({ ...this.state, [e.target.name]: value });
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        console.log(title, artist, genre, rating)
+        setSongs([...songs, {
+            title: title,
+            artist: artist,
+            genre: genre,
+            rating: rating,
+            id: Math.random() * 1000
+        }])
+        emptyStates()
     }
-    handleSubmit(e) {
-        e.preventDefault();
-        this.props.addSong(
-            this.state.title,
-            this.state.artist,
-            this.state.genre,
-            this.state.rating
-        );
-    }
-    render() {
-        return ( 
-            <form className="song-form" onSubmit={this.handleSubmit}>
-                <label>
+        
+    
+    return ( 
+        <div className="form-container">
+            <form className="song-form" onSubmit={handleSubmit}>
+                <label>Title name:
                     <input
                         type="text"
                         name="title"
                         placeholder="title"
-                        value={this.state.title}
-                        onChange={this.handleChange}
+                        value={title}
+                        onChange={handleTitleInput}
                     />
                 </label>
-                <label>
+                <label>Artist name:
                     <input
                         type="text"
                         name="artist"
                         placeholder="artist"
-                        value={this.state.artist}
-                        onChange={this.handleChange}
+                        value={artist}
+                        onChange={handleArtistInput}
                     />
                 </label>
-                <label>
+                <label>Genre:
                     <select
                         name="genre"
                         id="genre"
-                        value={this.state.genre}
-                        onChange={this.handleChange}
+                        value={genre}
+                        onChange={handleGenreInput}
                     >
                         <option value="select">Select your genre</option>
                         <option value="Pop">Pop</option>
@@ -59,12 +73,12 @@ class SongForm extends React.Component {
                         <option value="Dutch">Dutch</option>
                     </select>
                 </label>
-                <label>
+                <label>Rating:
                     <select
                         name="rating"
                         id="rating"
-                        value={this.state.rating}
-                        onChange={this.handleChange}>
+                        value={rating}
+                        onChange={handleRatingInput}>
                         <option value="number">Give your song a rating</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -74,9 +88,9 @@ class SongForm extends React.Component {
                     </select>
                 </label>
                 <input className="submit" type="submit" value="add song" />
-            </form>    
+            </form> 
+        </div>
          );
     }
-}
  
 export default SongForm;
