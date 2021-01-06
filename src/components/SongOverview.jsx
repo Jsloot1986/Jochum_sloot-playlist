@@ -1,48 +1,96 @@
-import React from 'react';
-import SongForm from './SongForm'
-import SongList from './SongList'
-import Header from './Header'
+import React, { useContext, useEffect, useState } from 'react';
+import Header from './Header';
+import SongForm from './SongForm';
+import SongList from './SongList';
+import FilterSongList from './FilterSongList';
+import { SongContext } from '../context/useContext';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-
-class SongOverview extends React.Component {
+function SongOverview() {
+  //global state
+  const [songs, setSongs] = useContext(SongContext);
   
-  constructor(props) {
-    super(props)
-    this.state = 
-    {
-      songs: [],
-      oldSongs: [],
-      loading: false,
-       
-    }
-     this.addSong = this.addSong.bind(this);
-    }
-    
-  addSong = (title, artist, genre, rating) => {
-    const songToAdd = {
-      id: Math.floor(Math.random() * 1000),
-      title: title,
-      artist: artist,
-      genre: genre,
-      rating: rating,
-    };
-    this.setState((prevState) => {
-      const newState = { ...prevState };
-      newState.songs = [...newState.songs, songToAdd];
-      return newState;
-    });
-  }
+  //local store
+  const saveLocalSongs = () => localStorage.setItem('songs', JSON.stringify(songs))
 
-  render() {
-    return (
+  const getLocalSongs = () => {
+    if (localStorage.getItem('songs') === null) {
+      localStorage.setItem('songs', JSON.stringify([]))
+    } else {
+      let songLocal = JSON.parse(localStorage.getItem('songs'))
+      setSongs(songLocal)
+    }
+  };
+    
+  //Copy from songs for filter genre
+  const [songsToFilter, setSongsToFilter] = useState([]);
+
+  // status from the buttons clicks
+  const [status, setStatus] = useState("all");
+
+  const handleFilter = () => {
+    switch (status) {
+      case 'Pop':
+        setSongsToFilter(songsToFilter.filter(todo => todo.genre === 'Pop'))
+        break;
+      case 'RnB':
+        setSongsToFilter(songsToFilter.filter(todo => todo.genre === 'RnB'))
+        break;
+      case 'HipHop':
+        setSongsToFilter(songsToFilter.filter(todo => todo.genre === 'HipHop'))
+        break;
+      case 'Classic':
+        setSongsToFilter(songsToFilter.filter(todo => todo.genre === 'Classic'))
+        break;
+      case 'Christmas':
+        setSongsToFilter(songsToFilter.filter(todo => todo.genre === 'Christmas'))
+        break;
+      case 'Dutch':
+        setSongsToFilter(songsToFilter.filter(todo => todo.genre === 'Dutch'))
+        break;
+      case 'All':
+        setSongsToFilter(songs)
+        break;
+      default:
+        setSongsToFilter(songs)
+      
+    };
+  };
+
+  //UseEffect
+  useEffect(() => {
+    getLocalSongs()
+  }, []);
+
+  useEffect(() => {
+    saveLocalSongs()
+    setSongsToFilter(songs)
+  }, [songs]);
+
+  useEffect(() => {
+    handleFilter();
+  }, [status]);
+
+  const resetSongsToFilter = () => {
+    setSongsToFilter(songs)
+  };
+
+  return (
+      <Router>
       <div className="song-overview">
-              <Header />
-              <SongForm addSong={this.addSong}/>
-                                        
-              <SongList songs={this.state.songs}/>
+        <Header />
+        <SongForm />
+        <FilterSongList
+          setStatus={setStatus}
+          resetSongsToFilter={resetSongsToFilter}
+        />
+        <Switch>
+          <Route path="/" exact component=
+            {() => <SongList filterSong={ songsToFilter }/>}/>
+        </Switch>
       </div>
+      </Router>
     );
   }
-}
 
 export default SongOverview;
