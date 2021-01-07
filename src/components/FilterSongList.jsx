@@ -10,6 +10,7 @@ function FilterSongList(props) {
         props.setStatus(getValue)
     }
 
+
     return (
         <div className="genreButtons">
             {filterGenre.map((song, index) => 

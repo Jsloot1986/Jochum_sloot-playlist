@@ -44,6 +44,24 @@ input, select{
   border: 1px solid white;
   border-radius: 10px;
 }
+.headerNav{
+  display: flex;
+  flex-direction: column;
+}
+ul{
+  list-style: none;
+  display: flex;
+}
+.home{
+  background-color: purple;
+  font-size: 25px;
+  width: 100px;
+}
+.about{
+  background-color: orange;
+  font-size: 25px;
+  width: 100px;
+}
 
 .submit:hover{
   background-color: lightblue;
@@ -130,11 +148,53 @@ button:hover{
   font-size: 30px;
 }
 
+.aboutContainer{
+  background-image: url('./img/background.jpg');
+  min-width: 100vh;
+  text-align: center;
+}
+
+.aboutTitle{
+  font-size: 40px;
+  color: white;
+  background-color: purple;
+}
+
+.aboutTextBox{
+  padding-bottom: 400px;
+  display: flex;
+  flex-direction: column;
+}
+h2{
+  background-color: purple;
+}
+h4, h3{
+  background-color: darkblue;
+}
+
+.aboutText{
+   background-color: orange;
+   font-size: 20px;
+   border: 1px solid white;
+   border-radius: 10px;
+}
+
+.picture{
+  width: 300px;
+  height: 300px;
+  border: solid 1px white;
+  border-radius: 50px;
+}
+
 @media only screen and (min-width: 600px){
 .song-form{
   display: grid;
   grid-template-columns: 250px 250px;
   grid-gap: 10px;
+}
+
+.home{
+  margin-left: 40px;
 }
 
 label{
@@ -191,6 +251,10 @@ button{
     grid-template-columns: 300px 300px 300px 300px;
   }
 
+  .home{
+    margin-left: 400px;
+  }
+
   label{
     margin-left: 20px;
     width: 300px;
@@ -220,5 +284,9 @@ button{
 
   .songlistItem button{
     margin-left: 25px;
+  }
+
+  .aboutContainer{
+    margin-left: 100px;
   }
 }
