@@ -3,6 +3,7 @@ import Header from './Header';
 import SongForm from './SongForm';
 import SongList from './SongList';
 import FilterSongList from './FilterSongList';
+import About from './About';
 import { SongContext } from '../context/useContext';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
@@ -57,6 +58,7 @@ function SongOverview() {
     };
   };
 
+
   //UseEffect
   useEffect(() => {
     getLocalSongs()
@@ -75,6 +77,7 @@ function SongOverview() {
     setSongsToFilter(songs)
   };
 
+
   return (
       <Router>
       <div className="song-overview">
@@ -85,6 +88,7 @@ function SongOverview() {
           resetSongsToFilter={resetSongsToFilter}
         />
         <Switch>
+          <Route path="/about" component={About}/>
           <Route path="/" exact component=
             {() => <SongList filterSong={ songsToFilter }/>}/>
         </Switch>
